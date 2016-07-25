@@ -14,9 +14,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),     // Fill in appropriate UIColor
         NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,    // "HelveticaNeue-CondensedBlack"
+        NSFontAttributeName : UIFont(name: "Impact", size: 40)!,    // "HelveticaNeue-CondensedBlack"
         NSStrokeWidthAttributeName : -3.0,                   // Fill in appropriate Float
     ]
+    
+    private var sentMemes: [Meme] {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+    }
     
     // MARK: IBOutlets
     @IBOutlet weak var topTextField: UITextField!
@@ -28,7 +32,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var imagePickerView: UIImageView!
     
     @IBOutlet weak var cameraButton: UIBarButtonItem!
- 
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // MARK: IBActions
     @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
@@ -50,15 +54,25 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         nextController.completionWithItemsHandler = { activity, success, items, error in
             
             if (success == true) {
-                // Generate a memed image and dismiss ViewController
+                // Generate a memed image, save it, dismiss ViewController, and go back to SentMemesVC
                 self.save(sharedImage)
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.returnToSentMemes(self.cancelButton)
+                print("Saved and segued back to Sent memes")
             }
         }
         
         // Present the view
         presentViewController(nextController, animated: true, completion: nil)
         
+    }
+    
+    // Action for the cancel button
+    @IBAction func returnToSentMemes(sender: UIBarButtonItem) {
+        // Nav to TabBarController or MemeTableViewController
+        let sentController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeTableViewController") as! MemeTableViewController
+        sentController.reloadInputViews()
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     // MARK:  Override functions
@@ -84,6 +98,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         } else {
             cameraButton.enabled = false
         }
+        
+        // if memes is empty, there are no sent memes to view or navigate to
+        if sentMemes.isEmpty {
+            cancelButton.enabled = false
+        }
 
     }
     
@@ -98,6 +117,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         setupTextField(topTextField, defaultText: "TOP")
         setupTextField(bottomTextField, defaultText: "BOTTOM")
         
+        // To see all of the fonts available as targets
+        // showFontFamiliesAvailable()
     }
 
     
@@ -174,8 +195,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             memedImage : generateMemedImage() )
         
         // Add meme to array in app delegate
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        let n : Int = 5 // change to 1 to turn in and any number for collection view testing
+        for _ in 1...n {
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        }
         let _ = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+        // dump(sentMemes)
     }
     
     func generateMemedImage() -> UIImage {
@@ -232,6 +257,16 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         print("UNsubscribe to keyboard notifications")
     }
 
+    func showFontFamiliesAvailable() {
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
+    }
     
 }
 
