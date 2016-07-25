@@ -247,7 +247,7 @@
         <scene sceneID="RQC-Ko-WNZ">
             <objects>
                 <navigationController id="sIn-dU-TME" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="downloads" id="9fp-6a-EBD"/>
+                    <tabBarItem key="tabBarItem" image="collection_30x30" selectedImage="collection_30x30-1" id="9fp-6a-EBD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jSH-Gz-ki7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -264,7 +264,7 @@
         <scene sceneID="NcG-JE-qkF">
             <objects>
                 <navigationController title="Table" id="eQg-Wh-nch" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="e3O-Dc-BRm"/>
+                    <tabBarItem key="tabBarItem" image="table_30x30" selectedImage="table_30x30-1" id="e3O-Dc-BRm"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DV1-56-dRk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -296,6 +296,12 @@
             <point key="canvasLocation" x="116" y="19"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection_30x30" width="30" height="30"/>
+        <image name="collection_30x30-1" width="30" height="30"/>
+        <image name="table_30x30" width="30" height="30"/>
+        <image name="table_30x30-1" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mh2-cd-lav"/>
     </inferredMetricsTieBreakers>
