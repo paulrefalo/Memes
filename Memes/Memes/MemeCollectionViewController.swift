@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeCollectionViewController : UICollectionViewController {
+class MemeCollectionViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // MARK: Global Declarations, outlets, and actions
 
@@ -26,22 +26,28 @@ class MemeCollectionViewController : UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         let space: CGFloat
         let dimension: CGFloat
+        // let itemSpacing: CGFloat
         
         if (UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            space = 3.0
-            dimension = (view.frame.size.width - (2 * space)) / 3
+            dimension = 100
+            space = (view.frame.size.width - (4 * dimension)) / 5
         } else {
-            space = 5.0
-            dimension = (view.frame.size.width - (2 * space)) / 5
+            dimension = 100
+            space = (view.frame.size.width - (6 * dimension)) / 7
         }
-        
+
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, space, 0, space) // (topMargin, left, bottom, right)
         flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space / space
+        flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
- 
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -60,7 +60,7 @@ class MemeTableViewController : UITableViewController {
         let currentMeme = memes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = currentMeme.topText + " - " + currentMeme.bottomText
+        cell.textLabel?.text = "\(currentMeme.topText) - \(currentMeme.bottomText)"
         cell.imageView?.image = currentMeme.memedImage
                 
         return cell

@@ -169,19 +169,17 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             return
         }
         
-        // how to resize image if needed
-        
+        /* how to resize image if needed
         let newSize:CGSize = CGSize(width: 250,height: 250)
         let rect = CGRectMake(0,0, newSize.width, newSize.height)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        
-        // image is a variable of type UIImage
         newImage.drawInRect(rect)
         
-        let _ = UIGraphicsGetImageFromCurrentImageContext()
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        imagePickerView.image = newImage  // resizedImage
+        */
+ 
+        imagePickerView.image = newImage  // resizedImage // newImage
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -195,7 +193,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             memedImage : generateMemedImage() )
         
         // Add meme to array in app delegate
-        let n : Int = 5 // change to 1 to turn in and any number for collection view testing
+        let n : Int = 7 // change to 1 to turn in and any number for collection view testing
         for _ in 1...n {
             (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
         }
