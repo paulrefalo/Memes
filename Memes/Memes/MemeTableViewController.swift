@@ -72,7 +72,7 @@ class MemeTableViewController : UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+        if (editingStyle == .Delete) {
             // Delete meme
             (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
