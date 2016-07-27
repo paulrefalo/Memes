@@ -193,7 +193,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             memedImage : generateMemedImage() )
         
         // Add meme to array in app delegate
-        let n : Int = 7 // change to 1 to turn in and any number for collection view testing
+        let n : Int = 1 // change to 1 to turn in and any number for collection view testing
         for _ in 1...n {
             (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
         }
